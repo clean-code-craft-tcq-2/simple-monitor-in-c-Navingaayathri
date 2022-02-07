@@ -61,4 +61,3 @@ int checkBatterySoH(float temperature, float SoC, float chargeRate){
 	condition =(checkBatteryTemperature(temperature)) && (checkBatterySoC(SoC)) && (checkBatteryChargeRate(chargeRate));
 	return condition;	
 }
-
