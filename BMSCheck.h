@@ -4,7 +4,6 @@
 #define MAX_THRESHOLD_BATT_SoC 80
 #define MAX_THRESHOLD_BATT_CHARGE_RATE 0.8
 
-
 extern int checkBatteryTemperature(float temperature);
 extern int checkBatterySoC(float SoC);
 extern int checkBatteryChargeRate(float chargeRate);
