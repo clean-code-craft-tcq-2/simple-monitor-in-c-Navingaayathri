@@ -31,29 +31,34 @@ return (checkValidRange(chargeRate, (float) MIN_BATT_CHARGE_RATE, (float) MAX_BA
 displayonConsole("Charge rate out of range");
 }
 
-int BatteryStateOk(float temperature, float SoC , float chargeRate, bool StateOk)
+int BatteryStateOk(float temperature, float SoC , float chargeRate)
 {	
 return((temperature) && (SoC) && (chargeRate));
 }
 
-int BatteryStateNOk(float temperature, float SoC , float chargeRate, bool StateNOk)
+int BatteryStateNOk(float temperature, float SoC , float chargeRate)
 {	
 return((temperature) || (SoC) || (chargeRate));
 }	
 
 int testBatteryStateOk(float temperature, float SoC, float chargeRate, bool StateOk)  
 {
-  bool status = BatteryStateOk(temperature,SoC,chargeRate,StateOk);
+  bool status;
+  status = BatteryStateOk(temperature,SoC,chargeRate,StateOk);
   assert(status == StateOk);
+  return 0;
 }
 
 int testBatteryStateNOk(float temperature, float SoC, float chargeRate, bool StateNOk)  
 {
-  bool status = BatteryStateNOk(temperature,SoC,chargeRate,StateNOk);
+  bool status;	
+  status = BatteryStateNOk(temperature,SoC,chargeRate,StateNOk);
   assert(status == StateNOk);
+  return 0;
 }
 
 void main()
 {
     assert(testBatteryStateOk(40.0, 55.0, 0.5, 1));
+    return 0;	
 }
