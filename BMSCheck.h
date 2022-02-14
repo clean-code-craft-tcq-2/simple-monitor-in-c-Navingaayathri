@@ -1,9 +1,9 @@
-#define   MIN_BATT_TEMP 0
-#define   MAX_BATT_TEMP 45
-#define   MIN_BATT_SoC 20
-#define   MAX_BATT_SoC 80
-#define   MIN_BATT_CHARGE_RATE 0
-#define   MAX_BATT_CHARGE_RATE 0.8
+#define MIN_BATT_TEMP 0
+#define MAX_BATT_TEMP 45
+#define MIN_BATT_SoC 20
+#define MAX_BATT_SoC 80
+#define MIN_BATT_CHARGE_RATE 0
+#define MAX_BATT_CHARGE_RATE 0.8
 
 extern bool checkValidRange(float inputValue, float MinThresholdvalue, float MaxThresholdvalue);
 extern bool checkBatteryTemperature(float temperature, float MIN_BATT_TEMP, float MAX_BATT_TEMP);
