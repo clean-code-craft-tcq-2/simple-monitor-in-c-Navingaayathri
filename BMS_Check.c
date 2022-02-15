@@ -44,7 +44,7 @@ return((temperature) || (SoC) || (chargeRate));
 int testBatteryStateOk(float temperature, float SoC, float chargeRate, bool StateOk)  
 {
   bool status;
-  status = BatteryStateOk(temperature,SoC,chargeRate,StateOk);
+  status = BatteryStateOk(temperature,SoC,chargeRate);
   assert(status == StateOk);
   return 0;
 }
@@ -52,12 +52,12 @@ int testBatteryStateOk(float temperature, float SoC, float chargeRate, bool Stat
 int testBatteryStateNOk(float temperature, float SoC, float chargeRate, bool StateNOk)  
 {
   bool status;	
-  status = BatteryStateNOk(temperature,SoC,chargeRate,StateNOk);
+  status = BatteryStateNOk(temperature,SoC,chargeRate);
   assert(status == StateNOk);
   return 0;
 }
 
-void main()
+int main()
 {
     assert(testBatteryStateOk(40.0, 55.0, 0.5, 1));
     return 0;	
