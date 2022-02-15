@@ -12,4 +12,4 @@ extern bool checkBatteryChargeRate(float chargeRate, float MIN_BATT_CHARGE_RATE,
 extern int BatteryStateOk(float temperature, float SoC , float chargeRate, bool StateOk);
 extern int BatteryStateNOk(float temperature, float SoC , float chargeRate, bool StateNOk);
 extern void displayonConsole();
-extern void main();
+extern int main();
