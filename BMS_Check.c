@@ -3,57 +3,79 @@
 #include <assert.h>
 #include "BMSCheck.h"
 
-void displayonConsole(const char* BreachMessage) 
+int displayonConsole(const char* BreachMessage) 
 {
-	printf("%s \n", BreachMessage);
+printf("%s \n", BreachMessage);
+return 0;
 }
 
 bool checkValidRange(float inputValue, float MinThresholdvalue, float MaxThresholdvalue)
 {
-  return (inputValue < MinThresholdvalue || inputValue > MaxThresholdvalue);
+return (inputValue < MinThresholdvalue || inputValue > MaxThresholdvalue);
 }
 
-bool checkBatteryTemperature(float temperature, float MIN_BATT_TEMP, float MAX_BATT_TEMP) 
+bool checkBatteryTemperature(float temperature)
 {
-    return(checkValidRange(temperature, (float) MIN_BATT_TEMP, (float) MAX_BATT_TEMP);
-	displayonConsole("Temperature out of range");
+bool result = (checkValidRange(temperature, (float)MIN_BATTTEMP, (float)MAX_BATTTEMP));
+if(result == true)	
+displayonConsole("Temperature out of range");
+else
+displayonConsole("Temperature is in range");
+return result;
 }
 
-bool checkBatterySoC(float SoC, float MIN_BATT_SoC, float MAX_BATT_SoC) 
+bool checkBatterySoC(float SoC)
 {
-return (checkValidRange(SoC, (float) MIN_BATT_SoC, (float) MIN_BATT_SoC);
-		displayonConsole("State of Charge out of range");
+bool result = (checkValidRange(SoC, (float)MIN_BATTSoC, (float)MAX_BATTSoC));
+if(result == true)	
+displayonConsole("State of Charge out of range");
+else
+displayonConsole("State of Charge is in range");
+return result;
 }
 	
-bool checkBatteryChargeRate(float chargeRate, float MIN_BATT_CHARGE_RATE, float MAX_BATT_CHARGE_RATE) 
+bool checkBatteryChargeRate(float chargeRate)
 {
-return (checkValidRange(chargeRate, (float) MIN_BATT_CHARGE_RATE, (float) MAX_BATT_CHARGE_RATE);
-		displayonConsole("Charge rate out of range");
+bool result = (checkValidRange(chargeRate, (float)MIN_BATTCHARGERATE, (float)MAX_BATTCHARGERATE));
+if(result == true)	
+displayonConsole("Charge rate out of range");
+else
+displayonConsole("Charge rate is in range");
+return result;
 }
 
-int BatteryStateOk(float temperature, float SoC , float chargeRate, bool StateOk)
+int BatteryStateOk(float temperature, float SoC , float chargeRate)
 {	
-	return((temperature) && (SoC) && (chargeRate));
+bool result_Temp =checkBatteryTemperature(temperature);
+bool result_SoC=checkBatterySoC(SoC);
+bool result_chargeRate=checkBatteryChargeRate(chargeRate);
+return(result_Temp || result_SoC || result_chargeRate);
 }
 
-int BatteryStateNOk(float temperature, float SoC , float chargeRate, bool StateNOk)
-{	
-	return((temperature) || (SoC) || (chargeRate));
-}	
 
-int testBatteryStateOk(float temperature, float SoC, float chargeRate, bool StateOk)  
+int testBatteryStateOk(float temperature, float SoC, float chargeRate)  
 {
-  bool status = BatteryStateOk(temperature,SoC,chargeRate,StateOk);
-  assert(status == StateOk);
+  bool status;
+  status = BatteryStateOk(temperature,SoC,chargeRate);
+  assert(status == 0);
+  return 0;
 }
 
-int testBatteryStateNOk(float temperature, float SoC, float chargeRate, bool StateNOk)  
+int testBatteryStateNOk(float temperature, float SoC, float chargeRate)  
 {
-  bool status = BatteryStateNOk(temperature,SoC,chargeRate,StateNOk);
-  assert(status == StateNOk);
+  bool status;	
+  status = BatteryStateOk(temperature,SoC,chargeRate);
+  assert(status == 1);
+  return 0;
 }
 
-void main()
+int main()
 {
-    assert(testBatteryStateOk(40.0, 55.0, 0.5, true));
+    testBatteryStateOk(40.0, 55.0, 0.5);
+    testBatteryStateOk(22.0, 30.0, 0.2);
+    testBatteryStateNOk(73.0, 65.0, 0.4);
+    testBatteryStateNOk(40.0, 75.0, 0.9);
+    testBatteryStateNOk(45.0, 85.0, 0.7);
+    testBatteryStateNOk(60.0, 100.0, 1.2);
+    return 0;	
 }
