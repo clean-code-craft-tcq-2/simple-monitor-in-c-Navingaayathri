@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-#include <stdbool.h>
-#include <assert.h>
-
 #define  MIN_BATTTEMP 0
 #define  MAX_BATTTEMP 45
 #define  MIN_BATTSoC 20
