@@ -30,14 +30,14 @@ char * DisplayinDeutsch[] = {"Temperatur ist normal", "Temperatur nähert sich d
 "SoC ist normal", "SoC nähert sich dem niedrigen Schwellenwert", "SoC liegt außerhalb des niedrigen Schwellenwerts", "SoC nähert sich dem hohen Schwellenwert", "SoC liegt außerhalb des hohen Schwellenwerts",
 "Laderate ist normal", "Laderate nähert sich dem niedrigen Schwellenwert", "Laderate liegt unter dem niedrigen Schwellenwert", "Laderate nähert sich dem hohen Schwellenwert", "Laderate liegt außerhalb des hohen Schwellenwerts"}; 
 
-int checkBatteryTemperatureLow(float temperature);
-int checkBatterySoCLow(float SoC) ;
-int checkBatteryChargeRateLow(float chargeRate);
-int checkBatteryTemperatureHigh(float temperature);
-int checkBatterySoCHigh(float SoC) ;
-int checkBatteryChargeRateHigh(float chargeRate);
-int BatteryStateOk(float temperature, float SoC , float chargeRate);
-int BatteryStateNOk(float temperature, float SoC , float chargeRate);
-int testBatteryStateOk(float temperature, float SoC, float chargeRate);
-int testBatteryStateNOk(float temperature, float SoC, float chargeRate); 
-int main();
+extern int checkBatteryTemperatureLow(float temperature);
+extern int checkBatterySoCLow(float SoC) ;
+extern int checkBatteryChargeRateLow(float chargeRate);
+extern int checkBatteryTemperatureHigh(float temperature);
+extern int checkBatterySoCHigh(float SoC) ;
+extern int checkBatteryChargeRateHigh(float chargeRate);
+extern int BatteryStateOk(float temperature, float SoC , float chargeRate);
+extern int BatteryStateNOk(float temperature, float SoC , float chargeRate);
+extern int testBatteryStateOk(float temperature, float SoC, float chargeRate);
+extern int testBatteryStateNOk(float temperature, float SoC, float chargeRate); 
+extern int main();
