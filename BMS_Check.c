@@ -34,7 +34,7 @@ int checkValidRangeLow(float inputValue, float MinThresholdvalue, float MaxThres
 	{
         result=LOW_LEVEL_BREACH;
 	}
-	else if((inputValue > MinThresholdvalue) && (inputValue <= LowLevelThreshold))
+	else if(inputValue <= LowLevelThreshold)
 	{		
         result=LOW_LEVEL_WARNING;
         }
@@ -48,7 +48,7 @@ int checkValidRangeHigh(float inputValue, float MinThresholdvalue, float MaxThre
 	{
         result=HIGH_LEVEL_BREACH;
 	}
-	else if((inputValue <= MaxThresholdvalue) && (inputValue > HighLevelThreshold))
+	else if(inputValue > HighLevelThreshold)
 	{		
         result=HIGH_LEVEL_WARNING;
         }
@@ -106,9 +106,9 @@ int testBatteryStateNOk(float temperature, float SoC, float chargeRate)
 int main()
 {
    testBatteryStateOk(10, 25, 0.1);
-   testBatteryStateOk(12,  30, 0.15);
-   testBatteryStateOk(15,  40, 0.17);
-   testBatteryStateOk(18,  42, 0.2);
+   testBatteryStateOk(12, 30, 0.15);
+   testBatteryStateOk(15, 40, 0.17);
+   testBatteryStateOk(18, 42, 0.2);
    testBatteryStateNOk(15, 81, 0.3);
    testBatteryStateNOk(-6, 30, 0.4);
    testBatteryStateNOk(50, 5, 0.9);
