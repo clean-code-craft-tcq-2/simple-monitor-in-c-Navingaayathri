@@ -1,3 +1,8 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <assert.h>
+#include "BMSCheck.h"
+
 int language = ENGLISH;
 
 int displayonConsole(const char* BreachMessage) 
@@ -23,43 +28,34 @@ displayonConsole(DisplayinDeutsch[(result_chargeRate_Low + result_chargeRate_Hig
 
 int checkValidRangeLow(float inputValue, float MinThresholdvalue, float MaxThresholdvalue)
 {   
-    int result;
+int result;
 	float LowLevelThreshold = (TOLERENCE_PERCENT *  MaxThresholdvalue) + MinThresholdvalue;
-	
+	int result = NORMAL;
 	if(inputValue < MinThresholdvalue)
 	{
-    result=LOW_LEVEL_BREACH;
+        result=LOW_LEVEL_BREACH;
 	}
 	else if((inputValue > MinThresholdvalue) && (inputValue <= LowLevelThreshold))
 	{		
-     result=LOW_LEVEL_WARNING;
-    }
-    else
-    {
-    result = NORMAL;
-    }
+        result=LOW_LEVEL_WARNING;
+        }
 	return result;
 }
 int checkValidRangeHigh(float inputValue, float MinThresholdvalue, float MaxThresholdvalue)
 {      
-    int result;
+        int result = NORMAL;
 	float HighLevelThreshold = MaxThresholdvalue - (TOLERENCE_PERCENT * MinThresholdvalue);
 	
 	if(inputValue > MaxThresholdvalue)
 	{
-    result=HIGH_LEVEL_BREACH;
+        result=HIGH_LEVEL_BREACH;
 	}
 	else if((inputValue <= MaxThresholdvalue) && (inputValue > HighLevelThreshold))
 	{		
-    result=HIGH_LEVEL_WARNING;
-    }
-    else
-    {
-    result = NORMAL;
-    }
-    return result;
+        result=HIGH_LEVEL_WARNING;
+        }
+        return result;
 }
-
 
 int BatteryStateOk(float temperature, float SoC , float chargeRate)
 {	
@@ -73,7 +69,6 @@ languageSelector(result_Temp_Low, result_Temp_High, result_SoC_Low, result_SoC_H
 int result = ((result_Temp_Low) || (result_Temp_High) || (result_SoC_Low) || (result_SoC_High) || (result_chargeRate_Low) || (result_chargeRate_High));
 return result;
 }
-
 
 int testBatteryStateOk(float temperature, float SoC, float chargeRate)  
 {
