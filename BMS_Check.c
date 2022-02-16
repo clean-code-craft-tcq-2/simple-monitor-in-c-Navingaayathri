@@ -28,9 +28,8 @@ displayonConsole(DisplayinDeutsch[(result_chargeRate_Low + result_chargeRate_Hig
 
 int checkValidRangeLow(float inputValue, float MinThresholdvalue, float MaxThresholdvalue)
 {   
-int result;
-	float LowLevelThreshold = (TOLERENCE_PERCENT *  MaxThresholdvalue) + MinThresholdvalue;
 	int result = NORMAL;
+	float LowLevelThreshold = (TOLERENCE_PERCENT *  MaxThresholdvalue) + MinThresholdvalue;	
 	if(inputValue < MinThresholdvalue)
 	{
         result=LOW_LEVEL_BREACH;
@@ -44,8 +43,7 @@ int result;
 int checkValidRangeHigh(float inputValue, float MinThresholdvalue, float MaxThresholdvalue)
 {      
         int result = NORMAL;
-	float HighLevelThreshold = MaxThresholdvalue - (TOLERENCE_PERCENT * MinThresholdvalue);
-	
+	float HighLevelThreshold = MaxThresholdvalue - (TOLERENCE_PERCENT * MinThresholdvalue);	
 	if(inputValue > MaxThresholdvalue)
 	{
         result=HIGH_LEVEL_BREACH;
