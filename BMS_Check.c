@@ -3,7 +3,7 @@
 #include <assert.h>
 #include "BMSCheck.h"
 
-int language = ENGLISH;
+int language = ENGLISH; /*Selected language for display of Battery status. Optional language: Deutsch*/
 
 int displayonConsole(const char* BreachMessage) 
 {
@@ -25,7 +25,7 @@ displayonConsole(DisplayinDeutsch[(result_SoC)+5]);
 displayonConsole(DisplayinDeutsch[(result_chargeRate)+10]); 
 }
 }
-
+/*check the input level */
 int checkValidRangeLow(float inputValue, float MinThresholdvalue, float MaxThresholdvalue)
 {   
 	int result = NORMAL;
@@ -76,7 +76,7 @@ int result_chargeRate_High=checkValidRangeHigh(chargeRate, MIN_BATTCHARGERATE, M
 int result_chargeRate = result_chargeRate_Low + result_chargeRate_High;
 return result_chargeRate;
 }
-
+/* Check battery status based on input values and display the status in selected language*/
 int BatteryStateOk(float temperature, float SoC , float chargeRate)
 {	
 int result_Temp = BatteryTemp(temperature, SoC, chargeRate);
