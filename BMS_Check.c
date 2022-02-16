@@ -34,7 +34,7 @@ int checkValidRangeLow(float inputValue, float MinThresholdvalue, float MaxThres
 	{
         result=LOW_LEVEL_BREACH;
 	}
-	else if((inputValue > MinThresholdvalue) && (inputValue <= LowLevelThreshold))
+	else if(inputValue <= LowLevelThreshold))
 	{		
         result=LOW_LEVEL_WARNING;
         }
@@ -48,7 +48,7 @@ int checkValidRangeHigh(float inputValue, float MinThresholdvalue, float MaxThre
 	{
         result=HIGH_LEVEL_BREACH;
 	}
-	else if((inputValue <= MaxThresholdvalue) && (inputValue > HighLevelThreshold))
+	else if(inputValue > HighLevelThreshold))
 	{		
         result=HIGH_LEVEL_WARNING;
         }
