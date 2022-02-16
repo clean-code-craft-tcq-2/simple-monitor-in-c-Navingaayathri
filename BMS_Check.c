@@ -11,18 +11,18 @@ printf("%s \n", BreachMessage);
 return 0;
 }
 
-int languageSelector(int result_Temp_Low, int result_Temp_High, int result_SoC_Low, int result_SoC_High, int result_chargeRate_Low, int result_chargeRate_High)
+int languageSelector(int result_Temp, int result_SoC, int result_chargeRate)
 {
 if (language == ENGLISH)
 {
-displayonConsole(DisplayinEnglish[result_Temp_Low + result_Temp_High]);
-displayonConsole(DisplayinEnglish[(result_SoC_Low + result_SoC_High)+5]);
-displayonConsole(DisplayinEnglish[(result_chargeRate_Low + result_chargeRate_High)+10]);}
+displayonConsole(DisplayinEnglish[result_Temp]);
+displayonConsole(DisplayinEnglish[(result_SoC)+5]);
+displayonConsole(DisplayinEnglish[(result_chargeRate)+10]);}
 else if (language == DEUTSCH)
 {
-displayonConsole(DisplayinDeutsch[result_Temp_Low + result_Temp_High]);
-displayonConsole(DisplayinDeutsch[(result_SoC_Low + result_SoC_High)+5]);
-displayonConsole(DisplayinDeutsch[(result_chargeRate_Low + result_chargeRate_High)+10]); 
+displayonConsole(DisplayinDeutsch[result_Temp]);
+displayonConsole(DisplayinDeutsch[(result_SoC)+5]);
+displayonConsole(DisplayinDeutsch[(result_chargeRate)+10]); 
 }
 }
 
@@ -34,7 +34,7 @@ int checkValidRangeLow(float inputValue, float MinThresholdvalue, float MaxThres
 	{
         result=LOW_LEVEL_BREACH;
 	}
-	else if(inputValue <= LowLevelThreshold)
+	else if((inputValue > MinThresholdvalue) && (inputValue <= LowLevelThreshold))
 	{		
         result=LOW_LEVEL_WARNING;
         }
@@ -48,23 +48,42 @@ int checkValidRangeHigh(float inputValue, float MinThresholdvalue, float MaxThre
 	{
         result=HIGH_LEVEL_BREACH;
 	}
-	else if(inputValue > HighLevelThreshold)
+	else if((inputValue <= MaxThresholdvalue) && (inputValue > HighLevelThreshold))
 	{		
         result=HIGH_LEVEL_WARNING;
         }
         return result;
 }
 
-int BatteryStateOk(float temperature, float SoC , float chargeRate)
+int BatteryTemp(float temperature, float SoC , float chargeRate)
 {	
 int result_Temp_Low =checkValidRangeLow(temperature, MIN_BATTTEMP, MAX_BATTTEMP);
 int result_Temp_High =checkValidRangeHigh(temperature, MIN_BATTTEMP, MAX_BATTTEMP);
+int result_Temp = result_Temp_Low + result_Temp_High;
+return result_Temp;
+}
+int BatterySoC(float temperature, float SoC , float chargeRate)
+{	
 int result_SoC_Low=checkValidRangeLow(SoC, MIN_BATTSoC, MAX_BATTSoC);
 int result_SoC_High=checkValidRangeHigh(SoC, MIN_BATTSoC, MAX_BATTSoC);
+int result_SoC = result_SoC_Low + result_SoC_High;
+return result_SoC;
+}
+int BatteryChargeRate(float temperature, float SoC , float chargeRate)
+{	
 int result_chargeRate_Low=checkValidRangeLow(chargeRate, MIN_BATTCHARGERATE, MAX_BATTCHARGERATE);
 int result_chargeRate_High=checkValidRangeHigh(chargeRate, MIN_BATTCHARGERATE, MAX_BATTCHARGERATE);
-languageSelector(result_Temp_Low, result_Temp_High, result_SoC_Low, result_SoC_High, result_chargeRate_Low, result_chargeRate_High);
-int result = ((result_Temp_Low) || (result_Temp_High) || (result_SoC_Low) || (result_SoC_High) || (result_chargeRate_Low) || (result_chargeRate_High));
+int result_chargeRate = result_chargeRate_Low + result_chargeRate_High;
+return result_chargeRate;
+}
+
+int BatteryStateOk(float temperature, float SoC , float chargeRate)
+{	
+int result_Temp = BatteryTemp(temperature, SoC, chargeRate);
+int result_SoC = BatterySoC(temperature, SoC , chargeRate);
+int result_chargeRate = BatteryChargeRate(temperature, SoC , chargeRate);
+languageSelector(result_Temp, result_SoC, result_chargeRate);
+int result = (result_Temp || result_SoC || result_chargeRate);
 return result;
 }
 
