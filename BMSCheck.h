@@ -34,4 +34,3 @@ extern int BatteryStateOk(float temperature, float SoC , float chargeRate);
 extern int BatteryStateNOk(float temperature, float SoC , float chargeRate);
 extern int testBatteryStateOk(float temperature, float SoC, float chargeRate);
 extern int testBatteryStateNOk(float temperature, float SoC, float chargeRate); 
-extern int main();
